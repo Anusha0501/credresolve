@@ -2,11 +2,12 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Dashboard from './pages/Dashboard'
 import ChatInterface from './pages/ChatInterface'
+import VoiceChat from './pages/VoiceChat'
 import MemoryViewer from './pages/MemoryViewer'
 import MetricsViewer from './pages/MetricsViewer'
 import KnowledgeBaseViewer from './pages/KnowledgeBaseViewer'
 import ToolLogsViewer from './pages/ToolLogsViewer'
-import { MessageSquare, Database, BarChart3, BookOpen, Wrench, Home } from 'lucide-react'
+import { MessageSquare, Database, BarChart3, BookOpen, Wrench, Home, Mic } from 'lucide-react'
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
                 <Link to="/chat" className="flex items-center space-x-1 hover:text-gray-200">
                   <MessageSquare className="w-5 h-5" />
                   <span>Chat</span>
+                </Link>
+                <Link to="/voice" className="flex items-center space-x-1 hover:text-gray-200">
+                  <Mic className="w-5 h-5" />
+                  <span>Voice</span>
                 </Link>
                 <Link to="/memory" className="flex items-center space-x-1 hover:text-gray-200">
                   <Database className="w-5 h-5" />
@@ -53,6 +58,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/chat" element={<ChatInterface />} />
+            <Route path="/voice" element={<VoiceChat />} />
             <Route path="/memory" element={<MemoryViewer />} />
             <Route path="/metrics" element={<MetricsViewer />} />
             <Route path="/knowledge" element={<KnowledgeBaseViewer />} />

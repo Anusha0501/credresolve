@@ -1,6 +1,6 @@
 # CredResolve AI Debt Collection Agent
 
-A complete internship-assignment-grade project demonstrating Agentic AI, LangGraph workflows, tool calling, RAG, voice interaction, memory persistence, and Hindi debt collection conversations with monitoring and observability.
+A complete internship-assignment-grade project demonstrating Agentic AI, LangGraph workflows, tool calling, RAG, voice interaction with Sarvam AI, memory persistence, and Hindi debt collection conversations with monitoring and observability.
 
 ## 🎯 Project Overview
 
@@ -9,7 +9,7 @@ CredResolve AI is an intelligent debt collection agent that:
 - Supports Hindi and Hinglish (Hindi written in English script)
 - Uses LangGraph state machine with 11 states
 - Implements RAG with ChromaDB for knowledge retrieval
-- Provides voice interaction using browser Speech APIs
+- Provides voice interaction using Sarvam AI (Saaras v3 STT, Bulbul v3 TTS)
 - Maintains conversation and user memory in SQLite
 - Offers real-time monitoring and metrics
 
@@ -24,18 +24,22 @@ The project consists of:
 - **ChromaDB**: Vector database for RAG
 - **SQLite**: Memory persistence
 - **Gemini API**: Embeddings and AI capabilities
+- **Sarvam AI**: Voice services (Saaras v3 STT, Bulbul v3 TTS)
 
 ### Frontend (React + TailwindCSS)
 - **Dashboard**: Overview and navigation
 - **Chat Interface**: Text and voice interaction
+- **Voice Chat**: Sarvam AI-powered voice conversations
 - **Memory Viewer**: User and conversation history
 - **Metrics Viewer**: System performance monitoring
 - **Knowledge Base Viewer**: RAG document browser
 - **Tool Logs Viewer**: Tool call history
 
-### Voice Features
-- **SpeechRecognition API**: Hindi/Hinglish speech input
-- **SpeechSynthesis API**: AI voice output
+### Voice Features (Sarvam AI)
+- **Saaras v3**: Hindi/Hinglish/code-mixed speech-to-text
+- **Bulbul v3**: Hindi text-to-speech with multiple speakers
+- **Voice Orchestrator**: Complete voice pipeline with LangGraph integration
+- **Latency Tracking**: STT, TTS, and roundtrip metrics
 
 ## 🚀 Quick Start
 
@@ -43,6 +47,7 @@ The project consists of:
 - Python 3.12
 - Node.js 18+
 - Gemini API Key
+- Sarvam AI API Key
 
 ### Backend Setup
 
@@ -58,7 +63,7 @@ pip install -r requirements.txt
 
 # Set up environment variables
 cp .env.example .env
-# Edit .env and add your GEMINI_API_KEY
+# Edit .env and add your GEMINI_API_KEY and SARVAM_API_KEY
 
 # Run the server
 python -m app.main
@@ -82,12 +87,22 @@ The frontend will start on `http://localhost:3000`
 
 ## 📱 Usage
 
-### Starting a Conversation
+### Starting a Conversation (Text)
 
 1. Navigate to the Chat Interface
 2. Enter a phone number (try: `+919876543210`, `+919123456789`, or `+919876543211`)
 3. Type your message or use voice input
 4. Watch the agent navigate through states and use tools
+
+### Starting a Voice Conversation
+
+1. Navigate to the Voice Chat page
+2. Enter a phone number
+3. Click "Start Recording" or upload an audio file
+4. Speak in Hindi or Hinglish
+5. Wait for STT transcription, agent processing, and TTS response
+6. Listen to the Hindi audio response
+7. View transcript, state, tools, and metrics
 
 ### Test Phone Numbers
 
@@ -171,7 +186,8 @@ Two types of memory:
 ## 🎨 Frontend Pages
 
 - **Dashboard** - Overview and quick start
-- **Chat Interface** - Main interaction page
+- **Chat Interface** - Text-based interaction page
+- **Voice Chat** - Sarvam AI-powered voice conversations
 - **Memory Viewer** - Browse stored memories
 - **Metrics Viewer** - System performance
 - **Knowledge Base Viewer** - Search documents
@@ -179,6 +195,7 @@ Two types of memory:
 
 ## 🔐 API Endpoints
 
+### General Endpoints
 - `POST /chat` - Send message to agent
 - `GET /metrics` - Get system metrics
 - `GET /memory/{phone_number}` - Get user memory
@@ -186,6 +203,14 @@ Two types of memory:
 - `POST /knowledge/retrieve` - RAG retrieval
 - `GET /customer/{phone_number}` - Get customer data
 - `GET /health` - Health check
+
+### Voice Endpoints
+- `POST /voice/transcribe` - Transcribe audio to text (Sarvam STT)
+- `POST /voice/chat` - Complete voice chat pipeline (STT → Agent → TTS)
+- `POST /voice/tts` - Convert text to speech (Sarvam TTS)
+- `GET /voice/audio/{filename}` - Serve generated audio files
+- `GET /voice/speakers` - Get available TTS speakers
+- `GET /voice/metrics` - Get voice-specific metrics
 
 ## 📁 Project Structure
 
@@ -200,12 +225,20 @@ credresolve/
 │   │   ├── monitoring/     # Metrics tracking
 │   │   ├── prompts/        # Prompt library
 │   │   ├── scenarios/      # Hindi scenarios
+│   │   ├── voice_routes.py # Voice API endpoints
 │   │   └── main.py         # FastAPI app
+│   ├── services/           # Voice services
+│   │   ├── sarvam_stt.py   # Sarvam STT service
+│   │   ├── sarvam_tts.py   # Sarvam TTS service
+│   │   └── voice_agent.py  # Voice orchestrator
+│   ├── audio_uploads/      # Generated audio files
 │   ├── knowledge/          # RAG documents
 │   └── requirements.txt
 ├── frontend/
 │   ├── src/
 │   │   ├── pages/          # React pages
+│   │   │   ├── VoiceChat.tsx # Voice chat component
+│   │   │   └── ...
 │   │   ├── services/       # API services
 │   │   └── App.jsx
 │   └── package.json
@@ -235,19 +268,7 @@ This project demonstrates:
 - `prompt_design.md` - Prompt engineering rationale
 - `deployment.md` - Deployment instructions
 - `demo_script.md` - Demo walkthrough
+- `voice_architecture.md` - Voice AI architecture details
+- `voice_setup.md` - Voice setup guide
+- `voice_demo_script.md` - Voice demo walkthrough
 
-## 🤝 Contributing
-
-This is an internship assignment project. For improvements or issues, please refer to the project guidelines.
-
-## 📄 License
-
-This project is created for educational purposes.
-
-## 🙏 Acknowledgments
-
-- LangChain for the AI framework
-- LangGraph for state machine orchestration
-- ChromaDB for vector storage
-- FastAPI for the backend framework
-- React and TailwindCSS for the frontend

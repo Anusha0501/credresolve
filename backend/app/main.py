@@ -13,6 +13,7 @@ from app.memory.database import memory_db
 from app.rag.ingestion import document_ingestion
 from app.rag.retriever import knowledge_retriever
 from app.monitoring.metrics import metrics_tracker, track_metric
+from app.voice_routes import router as voice_router
 
 # Initialize FastAPI app
 app = FastAPI(title="CredResolve AI Debt Collection Agent", version="1.0.0")
@@ -28,6 +29,9 @@ app.add_middleware(
 
 # Initialize agent graph
 agent_graph = create_agent_graph()
+
+# Include voice router
+app.include_router(voice_router)
 
 # Request/Response models
 class ChatRequest(BaseModel):

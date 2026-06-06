@@ -1,6 +1,6 @@
 # CredResolve AI Debt Collection Agent
 
-A complete internship-assignment-grade project demonstrating Agentic AI, LangGraph workflows, tool calling, RAG, voice interaction, memory persistence, and Hindi debt collection conversations with monitoring and observability.
+Demonstrating Agentic AI, LangGraph workflows, tool calling, RAG, voice interaction, memory persistence, and Hindi debt collection conversations with monitoring and observability.
 
 ## 🎯 Project Overview
 

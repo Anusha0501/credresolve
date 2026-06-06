@@ -236,18 +236,3 @@ This project demonstrates:
 - `deployment.md` - Deployment instructions
 - `demo_script.md` - Demo walkthrough
 
-## 🤝 Contributing
-
-This is an internship assignment project. For improvements or issues, please refer to the project guidelines.
-
-## 📄 License
-
-This project is created for educational purposes.
-
-## 🙏 Acknowledgments
-
-- LangChain for the AI framework
-- LangGraph for state machine orchestration
-- ChromaDB for vector storage
-- FastAPI for the backend framework
-- React and TailwindCSS for the frontend
